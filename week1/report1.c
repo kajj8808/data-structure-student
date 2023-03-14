@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include <math.h>
 
 /** 소수인지 확인하는 함수. */
 bool isPrime(int num)
