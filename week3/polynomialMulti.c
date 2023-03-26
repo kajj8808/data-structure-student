@@ -65,7 +65,10 @@ Polynomial polynomialMultiplication(Polynomial p1, Polynomial p2)
         }
 
         if (cPos <= maxDegree)
+        {
+            temp.items[cPos].value = -1;
             cPos++;
+        }
         else
             break;
     }
@@ -81,12 +84,24 @@ void printPol(Polynomial pol)
 {
     for (int i = 0; i <= pol.maxDegree; i++)
     {
-        if (pol.items[i].value <= 0)
+        if (pol.items[i].value <= 0 || pol.items[i].value == -1)
             continue;
 
         printf("%d^%d ", pol.items[i].value, pol.items[i].degree);
     }
     printf("\n");
+}
+
+void printPolynomialQustionAndResult(char *qustionTitle, Polynomial pol_1, Polynomial pol_2)
+{
+    printf("%s\n", qustionTitle);
+    printPol(pol_1);
+    printf("*\n");
+    printPol(pol_2);
+    printf("=\n");
+    Polynomial resultPol = polynomialMultiplication(pol_1, pol_2);
+    printPol(resultPol);
+    printf("==========================================\n");
 }
 
 void Q1()
@@ -110,8 +125,7 @@ void Q1()
         },
     };
 
-    Polynomial resultPol = polynomialMultiplication(pol_1, pol_2);
-    printPol(resultPol);
+    printPolynomialQustionAndResult("1.", pol_1, pol_2);
 }
 
 void Q2()
@@ -136,12 +150,12 @@ void Q2()
         },
     };
 
-    Polynomial resultPol = polynomialMultiplication(pol_1, pol_2);
-    printPol(resultPol);
+    printPolynomialQustionAndResult("2.", pol_1, pol_2);
 }
 
 int main()
 {
     Q1();
     Q2();
+    getchar();
 }
