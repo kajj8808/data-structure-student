@@ -84,11 +84,20 @@ void printPol(Polynomial pol)
 {
     for (int i = 0; i <= pol.maxDegree; i++)
     {
-        if (pol.items[i].value <= 0 || pol.items[i].value == -1)
+        if (pol.items[i].value == 0 || pol.items[i].value == -1)
             continue;
 
-        printf("%d^%d ", pol.items[i].value, pol.items[i].degree);
+        if (pol.maxDegree == i || pol.items[i].degree == 0)
+        {
+            printf("%d ", pol.items[i].value);
+            break;
+        }
+        else
+        {
+            printf("%dx^%d + ", pol.items[i].value, pol.items[i].degree);
+        }
     }
+
     printf("\n");
 }
 
