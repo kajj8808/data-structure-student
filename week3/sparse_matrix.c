@@ -88,5 +88,4 @@ int main()
     printMatrix(resultMatrix);
     printf("============================\n");
     free(resultMatrix);
-    return 0;
-}
+    system("pause"); // console 창 꺼지지 않기 위해 사용합니다.
