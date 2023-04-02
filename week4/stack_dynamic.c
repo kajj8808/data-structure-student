@@ -75,4 +75,5 @@ int main()
             }
         }
     }
+    system("pause"); // console 창 꺼지지 않기위해 사용합니다.
 }
