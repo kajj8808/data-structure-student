@@ -4,7 +4,6 @@
 #define MAX_STACK_SIZE 10
 
 typedef int element;
-/*  */
 element stack[MAX_STACK_SIZE];
 int top = -1;
 
@@ -61,4 +60,6 @@ int main()
             }
         }
     }
+    system("pause"); // console 창 꺼지지 않기위해 사용합니다.
+
 }
