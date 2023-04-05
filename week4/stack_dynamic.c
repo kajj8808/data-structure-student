@@ -7,41 +7,43 @@ typedef int element;
 
 typedef struct
 {
-    element *data;
+    element* data;
     int capacity;
     int top;
 } StackType;
 
-StackType *create(int size)
+StackType* create(int size)
 {
-    StackType *sp; // stack pointer
+    StackType* sp; // stack pointer
     sp = malloc(sizeof(StackType));
+    sp->capacity = size;
+    sp->data = malloc(size * sizeof(element));
     sp->top = -1;
     return sp;
 }
 
-int isFull(StackType *sp)
+int isFull(StackType* sp)
 {
     return (sp->top == (sp->capacity - 1));
 }
 
-void push(StackType *sp, element item)
+void push(StackType* sp, element item)
 {
     if (isFull(sp))
     {
         sp->capacity *= 2; // 배열의 길이
-        sp->data = (element *)realloc(sp->data, sp->capacity * sizeof(element));
+        sp->data = (element*)realloc(sp->data, sp->capacity * sizeof(element));
     }
     sp->top++;
     sp->data[sp->top] = item;
 }
 
-int isEmpty(StackType *sp)
+int isEmpty(StackType* sp)
 {
     return (sp->top == -1);
 }
 
-element pop(StackType *sp)
+element pop(StackType* sp)
 {
     if (isEmpty(sp))
     {
@@ -57,23 +59,32 @@ int main()
 {
     srand(time(NULL));
 
-    StackType *stack = create(MAX_STACK_SIZE);
+    StackType* stack = create(MAX_STACK_SIZE);
 
     for (int i = 0; i < 30; i++)
     {
         int ranNum = rand() % 100 + 1; // 1~100
         if (ranNum % 2 == 0)
         {
-            push(stack, ranNum);
+            if (!isFull(stack)) {
+                push(stack, ranNum);
+            }
+            else {
+                printf("stack이 가득 찼습니다. 더 이상 push할 수 없습니다.\n");
+            }
         }
         else
         {
-            element item = pop(stack);
-            if (item != -1)
-            {
+            if (!isEmpty(stack)) {
+                element item = pop(stack);
                 printf("pop : %d\n", item);
+            }
+            else {
+                printf("stack이 비었습니다. 더 이상 pop할 수 없습니다.\n");
             }
         }
     }
-    system("pause"); // console 창 꺼지지 않기위해 사용합니다.
+    free(stack->data);
+    free(stack);
+    return 0;
 }
